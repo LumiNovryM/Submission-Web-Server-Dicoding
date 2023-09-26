@@ -1,0 +1,21 @@
+<VirtualHost *:3000>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    ProxyRequests Off
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+    ProxyPass / http://0.0.0.0:8000/
+    ProxyPassReverse / http://0.0.0.0:8000/
+
+    <Location />
+        Order allow,deny
+        Allow from all
+    </Location>
+</VirtualHost>
